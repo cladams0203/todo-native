@@ -5,9 +5,18 @@ export function TodoForm(props) {
     const [form, setForm] = useState('')
 
     const setTodo = () => {
-        props.addTodo(form)
+        props.addTodo({
+            id: Date.now(),
+            todo: form,
+            completed: false
+        })
         setForm('')
     }
+
+    const clearTodo = () => {
+        props.clearTodos()
+    }
+
     return (
         <View style={{display:'flex', alignItems: 'center', marginTop: 30}} >
             <TextInput
@@ -24,6 +33,14 @@ export function TodoForm(props) {
             title={'Add Todo'}
             onPress={setTodo}
             ></Button>
+            <View style={{marginTop:20}} >
+            <Button
+                onPress={clearTodo}
+                color='red'
+                title={'Clear Selected'}
+            ></Button>
+            </View>
+            
         </View>
     )
 }
